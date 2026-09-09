@@ -32,6 +32,7 @@ INSERT INTO Employee values
 
 select * from Employee;
 
+-- 07-09-2026
 use T388_DB;
 show tables;
 select * from Employee;
@@ -93,4 +94,32 @@ update employee set Title ="Mrs."
 where Gender ="Female";
 
 update employee set Bonus = salary*0.05;
- 
+
+-- 09-09-2026
+use T388_DB;
+select * from Employee;
+
+create table Kisan_Info
+(ID  INT unique not null,
+NAME varchar(50) unique not null,
+AGE int check (Age>=18),
+EMAIL_ID varchar(45) default "dummy@gmail.com"
+);
+desc Kisan_Info;
+
+insert into Kisan_Info values
+(103,"Vikas",21,default);
+
+alter table Kisan_Info modify age int check (age>=18);
+
+insert into Kisan_Info(ID,name,age) values
+(104,"Prajwal",27);
+
+select * from Kisan_Info;
+
+select distinct FullName from employee;
+
+select * from employee
+where department ="IT" OR department ="Finance";
+select * from employee
+where department in ("IT","HR");
