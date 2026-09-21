@@ -123,3 +123,90 @@ select * from employee
 where department ="IT" OR department ="Finance";
 select * from employee
 where department in ("IT","HR");
+
+-- 21-09-2026
+use T388_DB;
+select * from Employee;
+
+-- ORDER BY CLAUSE
+select * from employee order by Fullname;
+select * from employee order by age desc;
+select * from employee order by age asc;
+select * from employee order by department;
+select * from employee where gender ="Male" order by fullname;
+
+select * from Employee limit 3;
+
+-- W H G O 
+-- WHERE, GROUP BY -[HAVING], ORDER BY
+
+-- Group By Clause
+
+select department from Employee group by department;
+select department, count(EmployeeID) from Employee group by department;
+select Gender, count(EmployeeID) from Employee group by Gender;
+select department, sum(salary) from Employee group by department;
+select department, max(salary) from Employee group by department;
+select department, min(salary) from Employee group by department;
+select department, avg(salary) from Employee group by department;
+select department, avg(salary), sum(salary) from Employee group by department;
+select department, avg(salary) as Avg_Salary, sum(salary) as Total_Salary from Employee group by department;
+
+select department,count(salary) from Employee group by department;
+select department,count(gender) from Employee group by department;
+select department,count(*) from Employee group by department;
+
+-- Having Clause (is always used along with group by clause)
+
+select department,count(*) from Employee group by department having sum(salary) >150000;
+select department,count(*) from Employee group by department having avg(age) <27;
+select department,avg(age),count(*) from Employee group by department;
+
+
+
+CREATE TABLE Projects (
+ProjectId INT PRIMARY KEY AUTO_INCREMENT,
+ProjectName VARCHAR(200) NOT NULL,
+EmployeeId INT,
+StartDate DATETIME,
+EndDate DATETIME
+);
+    
+    INSERT INTO Projects VALUES 
+(1,'Develop Ecommerse Website from scratch', 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+(2,'WordPress Website for our company', 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+(3,'Manage our Company Servers', 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+(4,'Hosting account is not working', 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+(5,'MySQL database from my desktop application', 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+(6,'Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY)),
+(7,'Migrate web application and database to new server', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 5 DAY)),
+(8,'Android Application development', 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+(9,'Hosting account is not working', 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+(10,'MySQL database from my desktop application', 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+(11,'Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
+
+select * from projects;
+select *,datediff(enddate, startdate) as Duration from projects;
+
+-- now() [shows you date & time]
+select Now();
+
+select * from projects where datediff(enddate, startdate)=45;
+
+alter table projects add Duration Int;
+update projects set duration = datediff(enddate,startdate);
+
+select duration,count(*) from projects group by duration;
+select duration,count(*) from projects group by duration having count(*)>=2;
+select duration,count(*) from projects group by duration having count(*)>=2 limit 3;
+
+select duration,count(*) from projects 
+where duration>=20 
+group by duration 
+having count(*)>=2
+order by duration desc
+;
+
+select * from employee limit 3,5;
+
+
