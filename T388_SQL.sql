@@ -137,7 +137,7 @@ select * from employee where gender ="Male" order by fullname;
 
 select * from Employee limit 3;
 
--- W H G O 
+-- W G H O 
 -- WHERE, GROUP BY -[HAVING], ORDER BY
 
 -- Group By Clause
@@ -209,4 +209,74 @@ order by duration desc
 
 select * from employee limit 3,5;
 
+-- 22-09-2026
+use T388_DB;
+
+-- distinct
+select distinct department from employee;
+select distinct gender from employee;
+select distinct age from employee;
+
+-- is null or not null
+select * from projects;
+select * from projects where EmployeeId is null;
+select * from projects where EmployeeId is not null;
+
+update projects set employeeid = 1003 where ProjectId =6;
+
+
+-- IN, BETWEEN & LIKE (LOGICAL OPERATORS)
+-- BETWEEN
+select * from employee where age between 25 and 27;
+select * from employee where employeeid between 1003 and 1007;
+
+-- IN
+select * from employee where employeeid in (1003, 1005, 1007);
+select * from employee where employeeid =1003
+or employeeid =1005
+or employeeid =1007;
+select * from employee where age in (23, 28);
+select * from employee where age in (23, 28) and department ="IT";
+select * from employee where age in (23, 28) and department ="IT" and employeeid in (1008,1001);
+
+-- LIKE 
+-- % means "0" or any no. of characters
+select * from ssimple;
+select * from ssimple where fullname like "a%";
+select * from ssimple where fullname like "_u%";
+select * from ssimple where fullname like "%t%";
+select * from ssimple where fullname like "___e%";
+select * from ssimple where fullname like "a_%";
+select * from ssimple where fullname like "a%t";
+select * from ssimple where fullname not like "a%t";
+
+-- Aggregate function
+select avg(salary) from employee;
+select sum(salary) from employee;
+select max(salary) from employee;
+select min(salary) from employee;
+select count(*) from employee;
+select count(*) as Total_Emp, 
+avg(salary) as Average, 
+sum(salary) as Total_Salary 
+from employee;
+
+-- Math Function (abs is absolute value the answer will always be in positive if the no. is negative then too)
+select abs(+35);
+select abs(-35);    
+select abs(300-200);
+select abs(300-800);
+select abs(6*(-7));
+
+select (datediff(startdate, enddate)) from projects;
+select abs(datediff(startdate, enddate)) from projects;
+
+select mod (12,7);
+
+select ceil (33.8);
+select floor (33.8);
+
+select truncate (123456.9874563,3);
+select truncate (123456.9874563,0);
+select truncate (123456.9874563,-1);
 
