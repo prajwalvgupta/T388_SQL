@@ -280,3 +280,79 @@ select truncate (123456.9874563,3);
 select truncate (123456.9874563,0);
 select truncate (123456.9874563,-1);
 
+
+-- 23-09-2026
+use T388_DB;
+
+-- EXPONENTIAL
+select exp(5); 
+select exp(2); 
+
+-- POWER
+select power (2,4);
+select pow(2,3);
+
+-- Square
+select sqrt(144);
+select sqrt(81);
+
+-- CONCAT
+select concat("Good"," ","Morning") as Remarks;
+
+select *,concat(fullname,"@itvedant.com")as code from employee;
+
+
+-- LOWER & UPPER
+select *,lower(fullname) as newname from employee;
+select *,upper(fullname) as capitalname from employee;
+select *,lower(fullname) as newname, upper(fullname) as capitalname from employee;
+
+select * from employee;
+alter table employee add Email varchar(50);
+
+update employee set Email = concat(fullname,"@gmail.com");
+
+-- REPLACE
+select replace("Hello Everyone, Good Morning","Morning","Night")as Statement;
+select replace("Hello Everyone, Good Night","Night","Morning")as Statement;
+
+select fullname, replace(fullname,"Jones","Patil")as changed from employee;
+select fullname, replace(fullname,"Mohanty","Gupta")as changed from employee;
+
+-- REVERSE
+select fullname, replace(fullname,"Mohanty","Gupta")as changed, reverse(fullname) from employee;
+
+-- LENGTH
+select fullname, length(fullname) from employee;
+select salary, length(salary) from employee;
+select address, length(address) from employee;
+
+-- SUBSTRING
+select substring("Maharashtra",1,5);
+select substring("Maharashtra",5,4);
+
+-- LTRIM, RTRIM & TRIM
+
+
+
+-- SUB QUERIES
+select age from employee where employeeid =1002;
+select age from employee where fullname ="Mary Smith";
+
+select * from employee 
+where age =(select age from employee where fullname ="Mary Smith");
+
+select * from employee
+where salary=(select salary from employee where fullname ="John Doe");
+
+select * from employee
+where department=(select department from employee where fullname ="John Doe");
+
+select max(salary) from employee;
+-- to show 2nd highest salary
+select max(salary) from employee 
+where salary <(select max(salary) from employee);
+-- to show 3rd highest salary
+select max(salary) from employee
+where salary <(select max(salary) from employee 
+where salary <(select max(salary) from employee));
