@@ -356,3 +356,29 @@ where salary <(select max(salary) from employee);
 select max(salary) from employee
 where salary <(select max(salary) from employee 
 where salary <(select max(salary) from employee));
+
+
+-- 24-09-2026
+use t388_db;
+
+-- Multiple Row Subquery
+select * from employee;
+
+-- in query
+select age from employee where employeeid in(1002,1003);
+select * from employee 
+where age in (select age from employee where employeeid in(1002,1003));
+
+--  any query
+select * from employee where 
+salary > any(select salary from employee where employeeid between 1001 and 1003);
+
+select * from employee where 
+salary < any(select salary from employee where employeeid between 1001 and 1003);
+
+-- all query
+select * from employee where 
+salary > all(select salary from employee where employeeid between 1001 and 1003);
+
+
+-- JOINS
