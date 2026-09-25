@@ -381,4 +381,23 @@ select * from employee where
 salary > all(select salary from employee where employeeid between 1001 and 1003);
 
 
+-- 25-09-2026
+use t388_db;
+
 -- JOINS
+select * from name_t388;
+select* from salary_t388;
+
+-- INNER JOIN
+select salary_t388.id,name,salary from name_t388 join salary_t388 on name_t388.id = salary_t388.id;
+
+-- LEFT JOIN
+select name_t388.id,name,salary from name_t388 left join salary_t388 on name_t388.id = salary_t388.id;
+
+select salary_t388.id,name,salary from salary_t388 left join name_t388 on salary_t388.id = name_t388.id;
+
+-- RIGHT JOIN
+select name_t388.id,name,salary from salary_t388 right join name_t388 on name_t388.id = salary_t388.id;
+
+select salary_t388.id,name,salary from name_t388 right join salary_t388 on salary_t388.id = name_t388.id;
+
