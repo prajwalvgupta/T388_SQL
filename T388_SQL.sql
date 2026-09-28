@@ -401,3 +401,21 @@ select name_t388.id,name,salary from salary_t388 right join name_t388 on name_t3
 
 select salary_t388.id,name,salary from name_t388 right join salary_t388 on salary_t388.id = name_t388.id;
 
+
+-- 28-09-2026
+use t388_db;
+
+-- OUTER JOIN
+select n.ID as Name_ID, s.ID as salary_ID, name, salary
+from name_t388 as n
+left join
+salary_t388 as s
+on s.ID = n.ID
+UNION
+select n.ID as Name_ID, s.ID as salary_ID, name, salary
+from name_t388 as n
+right join
+salary_t388 as s
+on s.ID = n.ID;
+
+
