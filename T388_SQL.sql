@@ -332,7 +332,9 @@ select substring("Maharashtra",1,5);
 select substring("Maharashtra",5,4);
 
 -- LTRIM, RTRIM & TRIM
-
+select fullname, length(fullname),
+ltrim(fullname), length(ltrim(fullname)),
+rtrim(fullname), length(rtrim(fullname)) from employee;
 
 
 -- SUB QUERIES
@@ -417,5 +419,4 @@ from name_t388 as n
 right join
 salary_t388 as s
 on s.ID = n.ID;
-
 
