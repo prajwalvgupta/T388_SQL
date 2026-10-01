@@ -420,3 +420,74 @@ right join
 salary_t388 as s
 on s.ID = n.ID;
 
+
+-- 01-10-2026
+use t388_db;
+
+-- WINDOWS FUNCTION
+
+-- ROW NUMBER & RANK WINDOW FUNCTIONS
+
+-- ROW NUMBER
+SELECT EmployeeId, 
+FullName, Department, Salary,
+ROW_NUMBER() OVER (PARTITION BY Department) AS RankInDepartment
+FROM Employee ORDER BY Department ASC;
+
+SELECT EmployeeId, 
+FullName, Department, Salary,
+ROW_NUMBER() OVER (PARTITION BY Salary) AS Rank_In_Salary
+FROM Employee ORDER BY Salary ASC;
+
+-- RANK
+SELECT FullName, Salary,
+RANK() OVER (ORDER BY Salary) AS Rank_In_Department
+FROM Employee;
+
+SELECT FullName,Department, Salary,
+DENSE_RANK() OVER (ORDER BY Salary) AS Rank_In_Department
+FROM Employee;
+
+-- AGGREGATE WINDOW FUNCTIONS
+SELECT EmployeeId,
+FullName, Department, Salary,
+AVG(Salary) OVER (PARTITION BY Department) AS Department_Avg_Salary
+FROM Employee
+ORDER BY Department, Salary DESC;
+
+SELECT EmployeeId,
+FullName, Department, Salary,
+AVG(Salary) OVER (PARTITION BY Department) AS Department_Avg_Salary,
+SUM(Salary) OVER (PARTITION BY Department) AS Department_Total_Salary
+FROM Employee
+ORDER BY Department, Salary DESC;
+
+SELECT EmployeeId,
+FullName, Department, Salary,
+AVG(Salary) OVER (PARTITION BY Department) AS Department_Avg_Salary,
+SUM(Salary) OVER (PARTITION BY Department) AS Department_Total_Salary
+FROM Employee 
+WHERE Gender = "Male"
+ORDER BY Department, Salary DESC;
+
+-- LAG WINDOW FUNCTION 
+SELECT EmployeeId,
+FullName, Department, Age, Salary,
+LAG(Salary,1,0) OVER (ORDER BY 	Salary) AS PreviousEmployeeSalaryByAge
+FROM Employee
+ORDER BY Salary;
+
+SELECT EmployeeId,
+FullName, Department, Age, Salary,
+LAG(Salary,1,0) OVER (ORDER BY 	Salary) AS PreviousEmployeeSalaryByAge,
+(Salary -(LAG(Salary,1,0) OVER (ORDER BY Salary))) AS Diff
+FROM Employee
+ORDER BY Salary;
+
+-- LEAD WINDOW FUNCTION 
+SELECT EmployeeId,
+FullName, Department, Age, Salary,
+LEAD(Salary,2,0) OVER (ORDER BY Salary) AS PreviousEmployeeSalaryByAge
+FROM Employee
+ORDER BY Salary;
+
