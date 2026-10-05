@@ -491,3 +491,50 @@ LEAD(Salary,2,0) OVER (ORDER BY Salary) AS PreviousEmployeeSalaryByAge
 FROM Employee
 ORDER BY Salary;
 
+-- 05-10-2026
+use t388_db;
+
+-- SELF JOIN
+
+SELECT * FROM t388_db.employee_manager_for_sql;
+
+SELECT E.Emp_ID, E.Emp_Name as Employees,
+M.Emp_Name as Manager
+FROM employee_manager_for_sql AS E
+LEFT JOIN
+employee_manager_for_sql AS M
+ON M.Emp_id = E.manager_id;
+
+-- CROSS JOIN
+
+SELECT * FROM Chess_team_A;
+SELECT * FROM Chess_team_B;
+
+SELECT ID, Team_B_ID, A.Name,B.name
+FROM 
+Chess_Team_A as A
+CROSS JOIN
+Chess_Team_B as B;
+
+
+-- VIEW 
+CREATE VIEW T388_view1 as
+SELECT ID, Team_B_ID, A.Name as Name_A,B.name as Name_B
+FROM 
+Chess_Team_A as A
+CROSS JOIN
+Chess_Team_B as B;
+
+select * from T388_view1;
+
+-- CTE
+with T388_CTE AS (SELECT ID, Team_B_ID, A.Name as Name_A,B.name as Name_B
+FROM 
+Chess_Team_A as A
+CROSS JOIN
+Chess_Team_B as B)
+SELECT * FROM T388_CTE;
+
+
+
+
